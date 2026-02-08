@@ -5,6 +5,9 @@ import App from './App.jsx'
 
 import { createBrowserRouter } from "react-router";
 import { RouterProvider } from "react-router/dom";
+import RootLayout from './Components/RootLayout/RootLayout.jsx';
+import Home from './Components/Home/Home.jsx';
+import AllMovies from './Components/AllMovies/AllMovies.jsx';
 
 const router = createBrowserRouter([
   {

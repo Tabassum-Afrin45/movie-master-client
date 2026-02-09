@@ -3,7 +3,12 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { use } from "react";
 
 const Navbar=()=>{
-    const {user} = use(AuthContext)
+    const {user,signOutUser} = use(AuthContext)
+
+    const handelSignOut=()=>{
+      signOutUser().then()
+      .catch()
+    }
 
     const links=<>
             <li><NavLink to="/">Home</NavLink></li>
@@ -37,7 +42,7 @@ const Navbar=()=>{
   <div className="navbar-end">
     {
       user?
-      <a className="btn">Sign Out</a>:
+      <a onClick={handelSignOut} className="btn">Sign Out</a>:
       <Link to="/register">Log in</Link>
     }
   </div>

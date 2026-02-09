@@ -20,7 +20,7 @@ const Navbar=()=>{
             }
     </>
     return(
-       <div className="navbar bg-base-100 shadow-sm">
+       <div className="px-10 navbar bg-base-100 shadow-sm">
   <div className="navbar-start">
     <div className="dropdown">
       <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -42,8 +42,8 @@ const Navbar=()=>{
   <div className="navbar-end">
     {
       user?
-      <a onClick={handelSignOut} className="btn">Sign Out</a>:
-      <Link to="/register">Log in</Link>
+      <a onClick={handelSignOut} className="btn btn-primary bg-green-700 border-none">Sign Out</a>:
+      <Link to="/register" className="btn btn-primary bg-green-700 border-none" >Log in</Link>
     }
   </div>
 </div>

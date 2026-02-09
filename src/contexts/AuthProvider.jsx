@@ -22,6 +22,12 @@ const AuthProvider=({children})=>{
         return signInWithPopup(auth, googleProvider)
     }
     
+    const signOutUser=()=>{
+        setLoading(true)
+        return signIOut(auth)
+    }
+    
+
     useEffect(()=>{
         const unsubscribe=onAuthStateChanged(auth,(currentUser)=>{
             setUser(currentUser)

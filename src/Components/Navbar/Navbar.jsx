@@ -1,4 +1,4 @@
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 import { AuthContext } from "../../contexts/AuthContext";
 import { use } from "react";
 
@@ -10,7 +10,7 @@ const Navbar=()=>{
             <li><NavLink to="/allMovies">All Movies</NavLink></li> 
             { 
               user &&<>
-            <li><NavLink to="/register">My Collection </NavLink></li> 
+            <li><NavLink to="/myCollection">My Collection </NavLink></li> 
             </>
             }
     </>
@@ -38,7 +38,7 @@ const Navbar=()=>{
     {
       user?
       <a className="btn">Sign Out</a>:
-      <a className="btn">Log in</a>
+      <Link to="/register">Log in</Link>
     }
   </div>
 </div>

@@ -10,6 +10,7 @@ import AllMovies from './Components/AllMovies/AllMovies.jsx';
 import Register from './Components/Register/Register.jsx';
 import RootLayout from './RootLayout/RootLayout.jsx';
 import AuthProvider from './contexts/AuthProvider.jsx';
+import MyCollection from './Components/MyCollection/MyCollection.jsx';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path:'register',
         Component:Register
+      },
+      {
+        path:'myCollection',
+        element:<MyCollection></MyCollection>
       }
     ]
   },

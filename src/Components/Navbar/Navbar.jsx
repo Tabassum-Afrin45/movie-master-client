@@ -1,52 +1,37 @@
-import { Link, NavLink } from "react-router";
+import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
-import { use } from "react";
+import { Link } from "react-router";
+import { NavLink } from "react-router";
 
-const Navbar=()=>{
-    const {user,signOutUser} = use(AuthContext)
+const Navbar = () => {
+  const { user, signOutUser } = useContext(AuthContext);
 
-    const handelSignOut=()=>{
-      signOutUser().then()
-      .catch()
-    }
-
-    const links=<>
-            <li><NavLink to="/">Home</NavLink></li>
-            <li><NavLink to="/allMovies">All Movies</NavLink></li> 
-            { 
-              user &&<>
-            <li><NavLink to="/myCollection">My Collection </NavLink></li> 
-            </>
-            }
-    </>
-    return(
-       <div className="px-10 navbar bg-base-100 shadow-sm">
-  <div className="navbar-start">
-    <div className="dropdown">
-      <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /> </svg>
+  return (
+    <div className="navbar bg-base-100 px-6">
+      <div className="navbar-start">
+        <Link to="/" className="text-xl font-bold">
+          Movie<span className="text-green-700">Master</span>Pro
+        </Link>
       </div>
-      <ul
-        tabIndex="-1"
-        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-         {links}
-      </ul>
+
+      <div className="navbar-center">
+        <NavLink to="/" className="px-3">Home</NavLink>
+        <NavLink to="/allMovies" className="px-3">All Movies</NavLink>
+        {user && <NavLink to="/myCollection" className="px-3">My Collection</NavLink>}
+      </div>
+
+      <div className="navbar-end">
+        {user ? (
+          <button onClick={signOutUser} className="btn btn-success">Logout</button>
+        ) : (
+          <>
+            <Link to="/login" className="btn btn-outline mr-2">Login</Link>
+            <Link to="/register" className="btn btn-success">Register</Link>
+          </>
+        )}
+      </div>
     </div>
-    <a className="btn btn-ghost text-xl">Movie<span className="text-green-700 font-bold">Master</span>Pro</a>
-  </div>
-  <div className="navbar-center hidden lg:flex">
-    <ul className="menu menu-horizontal px-1">
-     {links}
-    </ul>
-  </div>
-  <div className="navbar-end">
-    {
-      user?
-      <a onClick={handelSignOut} className="btn btn-primary bg-green-700 border-none">Sign Out</a>:
-      <Link to="/register" className="btn btn-primary bg-green-700 border-none" >Log in</Link>
-    }
-  </div>
-</div>
-    )
-}
+  );
+};
+
 export default Navbar;

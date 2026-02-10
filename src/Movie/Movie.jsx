@@ -1,5 +1,7 @@
+import { Link } from "react-router";
+
 const Movie = ({movie}) => {
-    const { title, genre, posterUrl } =movie
+    const {_id, title, genre, posterUrl } =movie
     return (
         <div className="card bg-base-100 shadow-sm">
             <figure className="p-4">
@@ -12,7 +14,7 @@ const Movie = ({movie}) => {
                 <div className="flex items-center gap-30 mx-auto"><h2 className="card-title">{title}</h2>
                 <h4>{genre}</h4></div>
                 <div className="card-actions">
-                    <button className="btn btn-primary bg-green-700 w-full mt-2">View Details</button>
+                    <Link to={`/movieDetails/${_id}`} className="btn btn-primary bg-green-700 w-full mt-2">View Details</Link>
                 </div>
             </div>
         </div>

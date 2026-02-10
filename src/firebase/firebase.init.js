@@ -6,12 +6,12 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAiMOFvHSBvUEJIyJm8mDnfNGEJYx5qQqY",
-  authDomain: "movie-master-pro-49fae.firebaseapp.com",
-  projectId: "movie-master-pro-49fae",
-  storageBucket: "movie-master-pro-49fae.firebasestorage.app",
-  messagingSenderId: "290270011573",
-  appId: "1:290270011573:web:ede3f0c732d7c5e62d1efc"
+  apiKey: import.meta.env.VITE_APIKEY,
+  authDomain: import.meta.env.VITE_AUTHDOMAIN,
+  projectId: import.meta.env.VITE_AUTHDOMAIN,
+  storageBucket: import.meta.env.VITE_STORAGEBUCKET,
+  messagingSenderId: import.meta.env.VITE_MESSAGINGSENDERID,
+  appId: import.meta.env.VITE_APPID,
 };
 
 // Initialize Firebase

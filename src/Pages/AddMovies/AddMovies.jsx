@@ -1,84 +1,138 @@
-import { use } from "react";
+import { use} from "react";
 import { AuthContext } from "../../context/AuthContext";
 import toast from "react-hot-toast";
 
 const AddMovie = () => {
+
+  const { user } = use(AuthContext);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const form = e.target;
+
+    const formData = {
+      title: form.title.value,
+      genre: form.genre.value,
+      plotSummary: form.plotSummary.value,
+      posterUrl: form.posterUrl.value,
+      releaseYear: form.releaseYear.value,
+      rating: form.rating.value,
+      addedBy: user?.email
+    };
+
+    console.log(formData);
+
+    toast.success("Movie Added Successfully!");
+
+    form.reset();
+  };
+
   return (
-    <div className="card border border-gray-200 bg-base-100 w-full max-w-md mx-auto shadow-2xl rounded-2xl">
-      <div className="card-body p-6 relative">
-        <h2 className="text-2xl font-bold text-center mb-6">Add New Model</h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Name Field */}
-          <div>
+    <div className="min-h-screen bg-green-700 flex items-center justify-center p-6">
+      
+      <div className="bg-white w-full max-w-md p-8 rounded-2xl shadow-2xl">
         
-            <label className="label font-medium">Name</label>
+        <h2 className="text-2xl font-bold text-center mb-6 text-green-700">
+          Add New Movie
+        </h2>
+
+        <form onSubmit={handleSubmit} className="space-y-4">
+
+          {/* Title */}
+          <div>
+            <label className="font-medium">Title</label>
             <input
               type="text"
-              name="name"
+              name="title"
               required
-              className="input w-full rounded-full focus:border-0 focus:outline-gray-200"
-              placeholder="Enter name"
+              className="w-full p-2 rounded-full border focus:outline-green-600"
+              placeholder="Enter movie title"
             />
           </div>
 
-          {/* Category Dropdown */}
+          {/* Genre */}
           <div>
-            <label className="label font-medium">Category</label>
+            <label className="font-medium">Genre</label>
             <select
-              defaultValue={""}
-              name="category"
+              name="genre"
               required
-              className="select w-full rounded-full focus:border-0 focus:outline-gray-200"
+              defaultValue=""
+              className="w-full p-2 rounded-full border focus:outline-green-600"
             >
-              <option value="" disabled>
-                Select category
-              </option>
-              <option value="Vehicles">Vehicles</option>
-              <option value="Plants">Plants</option>
-              <option value="Foods">Foods</option>
-              <option value="Home & Living">Home & Living</option>
-              <option value="Characters">Characters</option>
-              <option value="Space">Space</option>
-              <option value="Animals">Animals</option>
-              <option value="Other">Other</option>
+              <option value="" disabled>Select Genre</option>
+              <option value="Action">Action</option>
+              <option value="Comedy">Comedy</option>
+              <option value="Drama">Drama</option>
+              <option value="Horror">Horror</option>
+              <option value="Romance">Romance</option>
             </select>
           </div>
 
-          {/* Description Textarea */}
+          {/* Plot Summary */}
           <div>
-            <label className="label font-medium">Description</label>
+            <label className="font-medium">Plot Summary</label>
             <textarea
-              name="description"
+              name="plotSummary"
               required
               rows="3"
-             className="textarea w-full rounded-2xl focus:border-0 focus:outline-gray-200 h-[250px]"
-              placeholder="Enter description"
+              className="w-full p-3 rounded-2xl border focus:outline-green-600"
+              placeholder="Write plot summary..."
             ></textarea>
           </div>
 
-          {/* Thumbnail URL */}
+          {/* Poster URL */}
           <div>
-            <label className="label font-medium">Thumbnail URL</label>
+            <label className="font-medium">Poster URL</label>
             <input
               type="url"
-              name="thumbnail"
+              name="posterUrl"
               required
-              className="input w-full rounded-full focus:border-0 focus:outline-gray-200"
-              placeholder="https://example.com/image.jpg"
+              className="w-full p-2 rounded-full border focus:outline-green-600"
+              placeholder="https://example.com/poster.jpg"
+            />
+          </div>
+
+          {/* Release Year */}
+          <div>
+            <label className="font-medium">Release Year</label>
+            <input
+              type="number"
+              name="releaseYear"
+              required
+              className="w-full p-2 rounded-full border focus:outline-green-600"
+              placeholder="2025"
+            />
+          </div>
+
+          {/* Rating */}
+          <div>
+            <label className="font-medium">Rating (1-5)</label>
+            <input
+              type="number"
+              name="rating"
+              min="1"
+              max="5"
+              step="0.1"
+              required
+              className="w-full p-2 rounded-full border focus:outline-green-600"
+              placeholder="4.5"
             />
           </div>
 
           {/* Submit Button */}
           <button
             type="submit"
-            className="btn w-full text-white mt-6 rounded-full bg-linear-to-r from-pink-500 to-red-600 hover:from-pink-600 hover:to-red-700"
+            className="w-full bg-green-600 text-white py-2 rounded-full hover:bg-green-800 transition"
           >
             Add Movie
           </button>
+
         </form>
+
       </div>
     </div>
   );
-};
+}
 
 export default AddMovie;

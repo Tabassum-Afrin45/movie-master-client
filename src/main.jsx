@@ -1,50 +1,49 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.jsx'
-
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import "./index.css";
+import RootLayout from "./RootLayout/RootLayout.jsx";
+import Home from "./Components/Home/Home.jsx";
+import AllMovies from "./Components/AllMovies/AllMovies.jsx";
+import Register from "./Components/Register/Register.jsx";
+import Login from "./Components/Login/Login.jsx";
+import MyCollection from "./Components/MyCollection/MyCollection.jsx";
+import MovieDetails from "./Components/MovieDetails/MovieDetails.jsx";
+import AuthProvider from "./contexts/AuthProvider.jsx";
+import PrivateRoute from "./Routes/PrivateRoute.jsx";
 import { createBrowserRouter } from "react-router";
-import { RouterProvider } from "react-router/dom";
-import Home from './Components/Home/Home.jsx';
-import AllMovies from './Components/AllMovies/AllMovies.jsx';
-import Register from './Components/Register/Register.jsx';
-import RootLayout from './RootLayout/RootLayout.jsx';
-import AuthProvider from './contexts/AuthProvider.jsx';
-import MyCollection from './Components/MyCollection/MyCollection.jsx';
-import MovieDetails from './Components/MovieDetails/MovieDetails.jsx';
+import { RouterProvider } from "react-router";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    Component: RootLayout,
-    children:[
+    element: <RootLayout />,
+    children: [
+      { index: true, element: <Home /> },
+      { path: "allMovies", element: <AllMovies /> },
+      { path: "register", element: <Register /> },
+      { path: "login", element: <Login /> },
       {
-        index:true,
-        Component:Home
+        path: "myCollection",
+        element: (
+          <PrivateRoute>
+            <MyCollection />
+          </PrivateRoute>
+        ),
       },
       {
-        path:'allMovies',
-        Component:AllMovies
+        path: "movieDetails/:id",
+        element: <MovieDetails />,
+        loader: ({ params }) =>
+          fetch(`http://localhost:3000/movies/${params.id}`),
       },
-      {
-        path:'register',
-        Component:Register
-      },
-      {
-        path:'myCollection',
-        element:<MyCollection></MyCollection>
-      },
-      {
-        path:'movieDetails/:id',
-        loader:({params})=>fetch(`http://localhost:3000/movies/${params.id}`),
-        Component:MovieDetails
-      }
-    ]
+    ],
   },
 ]);
 
-createRoot(document.getElementById('root')).render(
+createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <AuthProvider> <RouterProvider router={router} /></AuthProvider>
-  </StrictMode>,
-)
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
+  </StrictMode>
+);

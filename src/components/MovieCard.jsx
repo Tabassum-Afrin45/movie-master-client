@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 
-const Movie = ({movie}) => {
+const MovieCard = ({movie}) => {
     const {_id, title, genre, posterUrl } =movie
     return (
         <div className="card bg-base-100 shadow-sm">
@@ -20,4 +20,4 @@ const Movie = ({movie}) => {
         </div>
     )
 }
-export default Movie;
+export default MovieCard;

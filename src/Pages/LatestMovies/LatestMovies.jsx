@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Movie from "../../Movie/Movie";
+import Movie from "../../components/MovieCard";
 
 const LatestMovies = () => {
   const [movies, setMovies] = useState([]);
